@@ -1,0 +1,26 @@
+[
+    {
+      "title": "Chiêu trò lừa đảo mới bằng video AI, nạn nhân cầu cứu!",
+      "detail": "Kẻ gian lập tài khoản TikTok giả mạo, sử dụng công nghệ AI để biến hình ảnh của một người bình thường thành người khuyết tật (mất tay) đang nuôi con và bán hàng online. Mục đích là đánh vào lòng thương của cộng đồng mạng để kêu gọi ủng hộ và mua hàng. Hình thức này lợi dụng sự cảm thông để kiếm tiền bất chính, dễ dàng lừa gạt người lớn tuổi hoặc người ít rành công nghệ, đồng thời bị chỉ trích là hành vi xúc phạm và vi phạm đạo đức nghiêm trọng.",
+      "imgsrc": "https://kenh14cdn.com/203336854389633024/2025/10/28/img5238-1761617046292703632187-1761618912713-17616189137921775549732.jpg",
+      "src": "https://kenh14.vn/canh-bao-nong-ve-chieu-tro-lua-dao-moi-khi-mua-hang-qua-mang-nan-nhan-cau-cuu-2152510280936241.chn"
+    },
+    {
+      "title": "Giả mạo biên lai chuyển tiền thành công",
+      "detail": "Các đối tượng sử dụng phần mềm để tạo ảnh chụp màn hình biên lai chuyển tiền giả, lừa các chủ cửa hàng giao hàng mà không nhận được tiền.",
+      "imgsrc": "https://images.unsplash.com/photo-1556742502-ec7c0e2f34b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNjUyOXwwfDF8c2VhcmNofDZ8fHFyJTIwY29kZSUyMHBheW1lbnR8ZW58MHx8fHwxNzIwNjg1MjMxfDA&ixlib=rb-4.0.3&q=80&w=400",
+      "src": "https://example.com/news/fake-receipt"
+    },
+    {
+      "title": "Cảnh báo lừa đảo 'Việc nhẹ lương cao' trên Telegram",
+      "detail": "Tuyển cộng tác viên chốt đơn ảo, yêu cầu nạp tiền để làm nhiệm vụ và hứa hẹn hoa hồng cao. Sau vài lần trả lãi, kẻ lừa đảo sẽ chặn nạn nhân khi họ nạp số tiền lớn.",
+      "imgsrc": "https://images.unsplash.com/photo-1611606063065-ee7946f0787a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNjUyOXwwfDF8c2VhcmNofDN8fHRlbGVncmFtfGVufDB8fHx8MTcyMDY4NTI4Nnww&ixlib=rb-4.0.3&q=80&w=400",
+      "src": "https://example.com/news/ctv-scam"
+    },
+    {
+      "title": "Giả mạo VNeID yêu cầu 'đồng bộ dữ liệu'",
+      "detail": "Kẻ gian gọi điện, tự xưng là công an, yêu cầu người dân cài đặt ứng dụng VNeID giả mạo (file .apk) để 'đồng bộ'. Ứng dụng này chứa mã độc đánh cắp mật khẩu.",
+      "imgsrc": "https://images.unsplash.com/photo-1614064548239-53538c208e8a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wzNjUyOXwwfDF8c2VhcmNofDEyfHxwcm90ZWN0aW9ufGVufDB8fHx8MTcyMDY4NTQ1NHww&ixlib=rb-4.0.3&q=80&w=400",
+      "src": "https://example.com/news/vneid-scam"
+    }
+  ]

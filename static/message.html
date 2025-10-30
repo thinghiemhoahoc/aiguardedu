@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Công cụ Kiểm tra Tin nhắn (Spam/Safe)</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <style>
+        /* Thiết lập biến màu và font chữ */
+        :root {
+            --brand-color: #007aff; /* Màu xanh Apple Blue */
+            --brand-light: #f0f7ff;
+            --safe-bg: #e6f9f0;
+            --safe-text: #0b875b;
+            --safe-border: #b3f2d2;
+            --spam-bg: #fff0f0;
+            --spam-text: #d93030;
+            --spam-border: #ffe0e0;
+            --grey-text: #555;
+            --light-grey: #f0f3f5;
+        }
+
+        /* Thiết lập font và box model cơ bản */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            /* Nền gradient tinh tế */
+            background-color: #f8fbff;
+            background-image: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Container chính của ứng dụng */
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 16px; /* Bo góc mềm mại hơn */
+            /* Bóng đổ hiện đại hơn */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.08);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: #222;
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-weight: 700;
+            font-size: 28px;
+            /* Thêm icon vào tiêu đề */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        h1 i {
+            color: var(--brand-color);
+        }
+
+        /* Vùng nhập văn bản */
+        textarea {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 5px;
+            border: 2px solid #e0e6eb;
+            border-radius: 10px;
+            resize: vertical;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+            transition: all 0.2s ease-in-out;
+        }
+
+        /* Hiệu ứng khi focus vào textarea */
+        textarea:focus {
+            outline: none;
+            border-color: var(--brand-color);
+            box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.1);
+        }
+
+        /* Bộ đếm ký tự */
+        #char-count {
+            display: block;
+            text-align: right;
+            margin-bottom: 25px;
+            font-size: 14px;
+            color: var(--grey-text);
+        }
+        
+        /* Nút Gửi */
+        button {
+            background-color: var(--brand-color);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 600;
+            width: 100%; /* Cho nút chiếm toàn bộ chiều rộng */
+            transition: all 0.2s ease-in-out;
+            /* Dùng flex để căn chỉnh text và spinner */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden; /* Ẩn spinner khi chưa loading */
+        }
+
+        button:hover:not(:disabled) {
+            background-color: #0068d6;
+            /* Hiệu ứng nhấc lên khi hover */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 122, 255, 0.2);
+        }
+
+        button:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            background-color: #a0cfff;
+            cursor: not-allowed;
+        }
+
+        /* CSS cho Spinner */
+        .spinner {
+            display: none; /* Ẩn ban đầu */
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 0.8s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Trạng thái Loading của nút */
+        button.loading #btn-text {
+            visibility: hidden; /* Ẩn chữ đi */
+        }
+        button.loading .spinner {
+            display: block;
+            position: absolute; /* Đặt spinner vào giữa nút */
+        }
+
+        /* Khu vực hiển thị kết quả */
+        #result-container {
+            margin-top: 30px;
+            padding: 18px 20px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 600;
+            min-height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px; /* Khoảng cách giữa icon và text */
+            transition: all 0.3s ease-in-out;
+            border: 1px solid transparent;
+        }
+
+        /* Các lớp màu cho kết quả (đã được làm mới) */
+        .result-default {
+            background-color: var(--light-grey);
+            color: var(--grey-text);
+            border-color: #e0e6eb;
+        }
+        .result-pending {
+            background-color: var(--brand-light);
+            color: var(--brand-color);
+            border-color: #b8d9ff;
+        }
+        .result-safe {
+            background-color: var(--safe-bg);
+            color: var(--safe-text);
+            border-color: var(--safe-border);
+        }
+        .result-spam {
+            background-color: var(--spam-bg);
+            color: var(--spam-text);
+            border-color: var(--spam-border);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fa-solid fa-shield-halved"></i>Kiểm tra Tin nhắn</h1>
+        
+        <textarea id="text-input" rows="6" maxlength="500" oninput="updateCharCount()" placeholder="Nhập tin nhắn bạn muốn kiểm tra tại đây (Giới hạn 500 ký tự)..."></textarea>
+        
+        <span id="char-count">0 / 500 ký tự</span>
+        
+        <button onclick="predictMessage(this)">
+            <span id="btn-text">Kiểm tra</span>
+            <span class="spinner"></span>
+        </button>
+        
+        <div id="result-container" class="result-default">
+            Nhập tin nhắn và nhấn "Kiểm tra" để bắt đầu.
+        </div>
+    </div>
+
+    <script>
+        // Giới hạn ký tự
+        const MAX_CHARS = 500; 
+
+        // Địa chỉ API backend của bạn
+        const API_URL = 'http://127.0.0.1:5000/predict';
+        
+        // Hàm cập nhật bộ đếm ký tự
+        function updateCharCount() {
+            const textArea = document.getElementById('text-input');
+            const charCountSpan = document.getElementById('char-count');
+            const currentLength = textArea.value.length;
+            
+            charCountSpan.textContent = `${currentLength} / ${MAX_CHARS} ký tự`;
+            
+            if (currentLength >= MAX_CHARS * 0.9) {
+                charCountSpan.style.color = 'var(--spam-text)';
+            } else {
+                charCountSpan.style.color = 'var(--grey-text)';
+            }
+        }
+
+        // Gọi hàm lần đầu để hiển thị 0/500
+        document.addEventListener('DOMContentLoaded', updateCharCount);
+
+
+        // Nhận 'btn' làm tham số
+        async function predictMessage(btn) {
+            const textArea = document.getElementById('text-input');
+            const resultContainer = document.getElementById('result-container');
+            const text = textArea.value.trim();
+
+            // Kích hoạt trạng thái loading
+            btn.classList.add('loading');
+            btn.disabled = true;
+
+            // Đặt kết quả về trạng thái "pending"
+            resultContainer.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Đang kiểm tra...';
+            resultContainer.className = 'result-pending';
+
+            if (!text) {
+                resultContainer.innerHTML = 'Vui lòng nhập nội dung tin nhắn.';
+                resultContainer.className = 'result-default';
+                // Tắt loading
+                btn.classList.remove('loading');
+                btn.disabled = false;
+                return;
+            }
+
+            if (text.length > MAX_CHARS) {
+                resultContainer.innerHTML = `❌ Tin nhắn quá dài. Chỉ được phép tối đa ${MAX_CHARS} ký tự.`;
+                resultContainer.className = 'result-spam';
+                btn.classList.remove('loading');
+                btn.disabled = false;
+                return;
+            }
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ text: text }),
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Lỗi HTTP: ${response.status} - Không thể kết nối tới Backend.`);
+                }
+
+                const data = await response.json();
+                const prediction = data.prediction;
+                
+                if (prediction === 'Safe') {
+                    // Thêm icon vào kết quả
+                    resultContainer.innerHTML = '<i class="fa-solid fa-check-circle"></i> Đây là Tin nhắn Hợp lệ (SAFE)';
+                    resultContainer.className = 'result-safe';
+                } else if (prediction === 'Scam') {
+                    resultContainer.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Đây là Tin nhắn Rác/Lừa đảo (SCAM)';
+                    resultContainer.className = 'result-spam';
+                } else {
+                    resultContainer.innerHTML = `Kết quả không xác định: ${prediction}`;
+                    resultContainer.className = 'result-default';
+                }
+
+            } catch (error) {
+                console.error('Lỗi khi gửi yêu cầu:', error);
+                resultContainer.innerHTML = `❌ Lỗi kết nối: ${error.message}.`;
+                resultContainer.className = 'result-spam';
+            } finally {
+                // Luôn tắt trạng thái loading sau khi hoàn thành
+                btn.classList.remove('loading');
+                btn.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>

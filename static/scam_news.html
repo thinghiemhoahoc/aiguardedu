@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tình huống lừa đảo — Anti-Scam Lab</title>
+  <meta
+    name="description"
+    content="Tổng hợp các tình huống, tin tức lừa đảo mới nhất để giúp cộng đồng phòng tránh."
+  />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    rel="stylesheet"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  
+  <style>
+    /* Kế thừa CSS từ trang chủ */
+    :root {
+      --primary: #2563eb;
+      --accent: #10b981;
+      --warning: #fb923c;
+      --bg1: #fbfdff;
+      --bg2: #eef6ff;
+      --glass: rgba(255, 255, 255, 0.85);
+      --text: #0f172a;
+      --muted: #475569;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: radial-gradient(1200px 600px at 10% -10%, #dbeafe, transparent),
+        radial-gradient(900px 600px at 110% 10%, #fee2e2, transparent),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+    }
+    .navbar.glass {
+      background: var(--glass) !important;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    .navbar a.nav-link,
+    .navbar-brand {
+      color: var(--text) !important;
+      font-weight: 500;
+    }
+    .navbar-brand:hover,
+    .navbar .nav-link:hover {
+      color: var(--primary) !important;
+    }
+    .glass {
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+    }
+    footer {
+      background: var(--bg2);
+      color: var(--muted);
+      padding: 1.5rem 0;
+      margin-top: auto;
+    }
+
+    /* --- CSS Tinh Chỉnh --- */
+
+    /* 1. Hiệu ứng hover + bo góc ảnh */
+    .feature-card {
+        transition: all 0.3s ease;
+        border: 2px solid transparent; /* Thêm border trong suốt để không bị giật khi hover */
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(37, 99, 235, 0.15); /* Shadow màu xanh */
+      border-color: var(--primary); /* Border màu xanh khi hover */
+    }
+    .card-img-top {
+        height: 200px;
+        object-fit: cover;
+        /* Bo góc trên của ảnh cho khớp card */
+        border-top-left-radius: 1rem;
+        border-top-right-radius: 1rem;
+    }
+    
+    /* 2. Style cho tin nổi bật (ngang) */
+    .featured-card-horizontal img {
+        height: 300px; /* Chiều cao cố định cho ảnh ngang */
+        object-fit: cover;
+        /* Bo góc trái (trên desktop) */
+        border-top-left-radius: 1rem;
+        border-bottom-left-radius: 1rem;
+        border-top-right-radius: 0; /* Reset */
+    }
+    /* Trên di động, ảnh về lại 200px và bo góc trên */
+    @media (max-width: 767.98px) {
+      .featured-card-horizontal img {
+          height: 200px;
+          border-top-left-radius: 1rem;
+          border-top-right-radius: 1rem;
+          border-bottom-left-radius: 0;
+      }
+    }
+
+    /* 3. Style cho thanh tìm kiếm (visual) */
+    .search-bar {
+      border: none;
+      border-radius: 0.5rem;
+      padding: 0.75rem 1.25rem;
+      background: var(--glass);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      width: 100%;
+    }
+    .search-bar:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+      border-color: var(--primary);
+    }
+  </style>
+</head>
+<body class="d-flex flex-column">
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top glass">
+    <div class="container">
+      <a class="navbar-brand" href="/"
+        ><i class="fa-solid fa-shield-halved me-2"></i>AI Guard EDU</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#nav"
+        aria-controls="nav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/#intro">Giới thiệu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/#features">Tính năng</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/#rules">Quy tắc</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/#cta">Bắt đầu</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+    
+    <div class="glass p-4 p-lg-5 text-center mb-5">
+      <h1 class="fw-bold display-5">
+        <i class="fa-solid fa-newspaper text-warning"></i>
+        Tình huống lừa đảo
+      </h1>
+      <p class="text-muted fs-5 mb-0">
+        Cập nhật các chiêu trò lừa đảo tinh vi để bạn và gia đình cùng
+        phòng tránh.
+      </p>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-lg-8 offset-lg-2">
+        <input 
+          type="search" 
+          class="search-bar" 
+          placeholder="Tìm kiếm tin tức (ví dụ: '5G', 'việc làm', ...)" 
+          id="search-input"
+        >
+      </div>
+    </div>
+
+    <div id="news-container" class="row g-4">
+      <div class="col-12 text-center p-5" id="loading-spinner">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Đang tải tin tức...</span>
+        </div>
+        <p class="text-muted mt-2">Đang tải tin tức...</p>
+      </div>
+      </div>
+  </main>
+
+  <footer class="text-center">
+    <div class="container">
+      <p class="mb-0">
+        <i class="fa-solid fa-shield-heart me-2"></i>Dự án Phòng chống lừa
+        đảo — cùng xây dựng không gian số an toàn.
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      loadNews();
+      
+      // (Tùy chọn) Thêm sự kiện cho thanh tìm kiếm
+      const searchInput = document.getElementById('search-input');
+      searchInput.addEventListener('input', (e) => {
+        filterNews(e.target.value);
+      });
+    });
+
+    // Biến toàn cục để lưu trữ tin tức
+    let allNewsItems = [];
+
+    async function loadNews() {
+      const container = document.getElementById('news-container');
+      const spinner = document.getElementById('loading-spinner');
+
+      try {
+        const response = await fetch('new.json');
+        if (!response.ok) {
+          throw new Error(`Lỗi HTTP: ${response.status}`);
+        }
+        allNewsItems = await response.json(); // Lưu vào biến toàn cục
+
+        // Xóa spinner
+        spinner.remove();
+        
+        // Hiển thị tất cả tin tức
+        displayNews(allNewsItems);
+
+      } catch (error) {
+        console.error('Không thể tải tin tức:', error);
+        container.innerHTML = `
+          <div class="col-12">
+            <div class="alert alert-danger text-center">
+              Đã xảy ra lỗi khi tải dữ liệu. Vui lòng thử lại sau.
+            </div>
+          </div>`;
+      }
+    }
+
+    /**
+     * Hàm mới: Hiển thị tin tức dựa trên một mảng dữ liệu
+     * @param {Array} newsItems Mảng tin tức cần hiển thị
+     */
+    function displayNews(newsItems) {
+      const container = document.getElementById('news-container');
+      container.innerHTML = ''; // Xóa nội dung cũ
+
+      if (newsItems.length === 0) {
+        container.innerHTML = `
+          <div class="col-12">
+            <div class="alert alert-info text-center">
+              Không tìm thấy tin tức nào phù hợp.
+            </div>
+          </div>`;
+        return;
+      }
+
+      // Lặp qua mảng tin tức
+      newsItems.forEach((item, index) => {
+        let cardHTML = '';
+        
+        // ---- ĐÂY LÀ LOGIC MỚI ----
+        // Nếu là tin đầu tiên (index === 0), dùng layout ngang
+        if (index === 0) {
+          cardHTML = `
+            <div class="col-12">
+              <div class="glass p-0 h-100 feature-card featured-card-horizontal overflow-hidden">
+                <div class="row g-0">
+                  <div class="col-md-5">
+                    <img src="${item.imgsrc}" class="img-fluid" alt="${item.title}">
+                  </div>
+                  <div class="col-md-7 d-flex flex-column p-4 p-lg-5">
+                    <span class="badge bg-danger mb-2" style="width: fit-content;">
+                      <i class="fa-solid fa-star me-1"></i> Tin nổi bật
+                    </span>
+                    <h2 class="fw-bold mb-3">${item.title}</h2>
+                    <p class="text-muted fs-5 flex-grow-1">${item.detail}</p>
+                    <a href="${item.src}" target="_blank" rel="noopener noreferrer" class="btn btn-primary mt-auto" style="width: fit-content;">
+                      Xem chi tiết
+                      <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12 mt-4 mb-2">
+              <h3 class="fw-bold">Các tin khác</h3>
+              <hr>
+            </div>
+          `;
+        } 
+        // Các tin còn lại, dùng layout thẻ đứng 3 cột
+        else {
+          cardHTML = `
+            <div class="col-lg-4 col-md-6">
+              <div class="glass p-0 h-100 d-flex flex-column feature-card overflow-hidden">
+                <img src="${item.imgsrc}" class="card-img-top" alt="${item.title}">
+                <div class="p-3 d-flex flex-column flex-grow-1">
+                  <h5 class="fw-bold">${item.title}</h5>
+                  <p class="text-muted small flex-grow-1">${item.detail}</p>
+                  <a href="${item.src}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-sm mt-auto">
+                    Xem nguồn tin
+                    <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+          `;
+        }
+        
+        container.insertAdjacentHTML('beforeend', cardHTML);
+      });
+    }
+
+    /**
+     * Hàm mới: Lọc tin tức dựa trên từ khóa tìm kiếm
+     * @param {string} query Từ khóa tìm kiếm
+     */
+    function filterNews(query) {
+      const normalizedQuery = query.toLowerCase().trim();
+
+      // Nếu không tìm kiếm, hiển thị tất cả
+      if (!normalizedQuery) {
+        displayNews(allNewsItems);
+        return;
+      }
+
+      // Lọc mảng tin tức gốc
+      const filteredItems = allNewsItems.filter(item => {
+        const titleMatch = item.title.toLowerCase().includes(normalizedQuery);
+        const detailMatch = item.detail.toLowerCase().includes(normalizedQuery);
+        return titleMatch || detailMatch;
+      });
+
+      // Hiển thị kết quả đã lọc
+      displayNews(filteredItems);
+    }
+  </script>
+</body>
+</html>

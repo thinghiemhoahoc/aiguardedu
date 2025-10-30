@@ -1,0 +1,198 @@
+[
+  {
+    "id": 1,
+    "chuDe": "Giả mạo ngân hàng",
+    "tinhHuong": "Bạn nhận được SMS với tên hiển thị (Brandname) 'VPBank', báo tài khoản bị khóa và yêu cầu bấm vào link 'vpbank-online.vip' để xác minh ngay.",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "Ngân hàng không yêu cầu xác minh qua link lạ. Tên miền '.vip' và gạch nối 'vpbank-online' là dấu hiệu giả mạo tên miền chính chủ (vpbank.com.vn)."
+  },
+  {
+    "id": 2,
+    "chuDe": "OTP & mã xác thực",
+    "tinhHuong": "Một người tự xưng là nhân viên nhà mạng, gọi điện nói hỗ trợ nâng cấp SIM 5G và yêu cầu bạn đọc mã OTP vừa gửi đến máy.",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "OTP là chìa khóa bí mật. Đọc OTP cho người lạ đồng nghĩa với việc đưa chìa khóa nhà cho họ. Nhân viên nhà mạng không bao giờ xin OTP của bạn."
+  },
+  {
+    "id": 3,
+    "chuDe": "Đầu tư siêu lợi nhuận",
+    "tinhHuong": "Nhóm Telegram khoe lãi mỗi ngày 5–10% bảo đảm, chỉ cần nạp tiền và làm theo 'chuyên gia'.",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "Lợi nhuận cao, rủi ro thấp, bảo đảm 100% là dấu hiệu lừa đảo Ponzi. Không có khoản đầu tư nào hợp pháp cam kết lợi nhuận cố định theo ngày cao như vậy."
+  },
+  {
+    "id": 4,
+    "chuDe": "Mạo danh cơ quan nhà nước",
+    "tinhHuong": "Cuộc gọi tự động xưng 'Viện Kiểm Sát', đọc đúng họ tên, CCCD của bạn, nói bạn dính án rửa tiền, yêu cầu chuyển tiền 'kiểm tra'.",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "Cơ quan công an, viện kiểm sát KHÔNG bao giờ làm việc/yêu cầu chuyển tiền qua điện thoại. Dữ liệu cá nhân của bạn có thể đã bị lộ lọt từ trước."
+  },
+  {
+    "id": 5,
+    "chuDe": "Gói hàng quốc tế",
+    "tinhHuong": "Email thông báo có kiện hàng quốc tế kẹt tại hải quan, cần đóng 50.000 VNĐ phí qua cổng thanh toán lạ để nhận.",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "Các phí hải quan/thuế được thu qua kênh chính thức (như app của bưu cục) hoặc thu khi nhận hàng, không ai yêu cầu đóng phí lẻ qua cổng thanh toán vô danh."
+  },
+  {
+    "id": 6,
+    "chuDe": "Facebook/ Zalo bị khóa",
+    "tinhHuong": "Tin nhắn 'Trang của bạn vi phạm tiêu chuẩn cộng đồng. Bấm link metta-support.net để kháng nghị trong 24h'.",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "Meta/Facebook không gửi kháng nghị qua inbox. Link giả mạo (metta thay vì meta) sẽ dẫn tới trang đăng nhập giả để ăn cắp mật khẩu."
+  },
+  {
+    "id": 7,
+    "chuDe": "Từ thiện giả mạo",
+    "tinhHuong": "Fanpage mới lập đăng hình bệnh nhi và số tài khoản cá nhân kêu gọi quyên góp khẩn cấp.",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "Quyên góp chính danh thường qua tổ chức có pháp nhân (bệnh viện, quỹ uy tín), công khai minh bạch. Tài khoản cá nhân + tạo trang mới = rủi ro cao."
+  },
+  {
+    "id": 8,
+    "chuDe": "Ứng dụng APK",
+    "tinhHuong": "Bạn được gửi file .apk bảo 'app ngân hàng phiên bản mới, cài đi cho tiện'.",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "Cài APK ngoài kho chính thức (Google Play) có thể bị chiếm quyền thiết bị, đánh cắp SMS/OTP. Ngân hàng chỉ phát hành app trên kho ứng dụng."
+  },
+  {
+    "id": 9,
+    "chuDe": "Việc làm part-time",
+    "tinhHuong": "Công việc 'ngồi nhà bấm like sản phẩm' nhận 500k/ngày, yêu cầu nộp trước 200k 'phí kích hoạt tài khoản'.",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "Tuyển dụng chuẩn không yêu cầu nộp phí trước. Đây là mô hình lừa đảo, ban đầu trả tiền mồi, sau đó yêu cầu nạp tiền lớn hơn cho 'nhiệm vụ' và biến mất."
+  },
+  {
+    "id": 10,
+    "chuDe": "Mua bán C2C",
+    "tinhHuong": "Người mua gửi link 'biên lai chuyển khoản' từ trang web lạ, yêu cầu bạn cung cấp OTP để 'xác nhận nhận tiền'.",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "Nhận tiền KHÔNG bao giờ cần OTP. Biên lai giả + link lạ + xin OTP = combo chiếm tài khoản ngân hàng."
+  },
+  {
+    "id": 11,
+    "chuDe": "Wi-Fi công cộng",
+    "tinhHuong": "Bạn dùng Wi-Fi miễn phí ở quán cà phê, vào app ngân hàng chính chủ (đã tải từ App Store) để kiểm tra tài khoản.",
+    "phanLoai": "an toàn",
+    "giaiThich": "App ngân hàng chính chủ sử dụng mã hóa mạnh (HTTPS + mã hóa riêng). Miễn là app chính chủ, việc kiểm tra số dư trên Wi-Fi công cộng là tương đối an toàn."
+  },
+  {
+    "id": 12,
+    "chuDe": "Email lạ có tệp nén",
+    "tinhHuong": "Email từ người không quen, tiêu đề 'Hóa đơn', đính kèm .zip yêu cầu giải nén và chạy file .exe.",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "Khả năng cao là mã độc/ransomware. Không mở file thực thi (.exe, .msi, .bat) từ nguồn không tin cậy. File .zip thường được dùng để qua mặt bộ lọc virus."
+  },
+  {
+    "id": 13,
+    "chuDe": "Deepfake & AI lừa đảo",
+    "tinhHuong": "Người thân gọi video call Zalo, hình ảnh chập chờn, nói đang kẹt xe, nhờ bạn chuyển 5 triệu gấp vào số tài khoản lạ.",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "Đây là dấu hiệu Deepfake. Hình ảnh/âm thanh không khớp, chập chờn + kịch bản khẩn cấp + tài khoản lạ. Hãy cúp máy và gọi lại số SĐT chính chủ của họ."
+  },
+  {
+    "id": 14,
+    "chuDe": "OTP & mã xác thực",
+    "tinhHuong": "Bạn đang đặt hàng trên Shopee. Tới bước thanh toán, ứng dụng ngân hàng gửi OTP để bạn nhập vào và hoàn tất.",
+    "phanLoai": "an toàn",
+    "giaiThich": "OTP này là an toàn vì CHÍNH BẠN đang chủ động thực hiện giao dịch và biết rõ mã này dùng để làm gì (trừ tiền cho đơn hàng)."
+  },
+  {
+    "id": 15,
+    "chuDe": "QR Code lừa đảo",
+    "tinhHuong": "Bạn thấy mã QR dán đè lên trụ sạc xe điện công cộng với nội dung 'Quét để thanh toán phí'. Bạn quét và nó mở ra một website yêu cầu nhập thông tin thẻ.",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "Lừa đảo Quishing (QR Phishing). Kẻ gian dán đè QR giả. Website lạ yêu cầu nhập thẻ là để đánh cắp thông tin. Chỉ quét QR từ app chính chủ của dịch vụ."
+  },
+  {
+    "id": 16,
+    "chuDe": "Giả mạo ngân hàng",
+    "tinhHuong": "SMS từ Brandname 'Techcombank' thông báo: 'GD: -250,000VND tai 7-Eleven... So du: 5,000,000VND.' Tin nhắn không chứa link.",
+    "phanLoai": "an toàn",
+    "giaiThich": "Đây là tin nhắn thông báo biến động số dư hợp lệ. Nó chỉ CUNG CẤP thông tin, không YÊU CẦU bạn làm gì. Lừa đảo là khi nó yêu cầu bấm link/gọi số lạ."
+  },
+  {
+    "id": 17,
+    "chuDe": "Chuyển tiền nhầm",
+    "tinhHuong": "Tài khoản bỗng 'ting ting' 10 triệu. Người lạ gọi/nhắn tin nói lỡ chuyển nhầm, xin bạn chuyển lại gấp cho... một số tài khoản khác (tên khác).",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "Đây là bẫy. Tiền đó có thể là tiền bẩn (rửa tiền) hoặc họ sẽ đòi lại tiền gốc. Tuyệt đối KHÔNG chuyển lại. Hãy liên hệ ngân hàng và chờ họ xử lý."
+  },
+  {
+    "id": 18,
+    "chuDe": "Hỗ trợ kỹ thuật giả mạo",
+    "tinhHuong": "Người tự xưng là 'nhân viên Microsoft' gọi, nói máy tính của bạn bị virus nặng. Họ yêu cầu bạn cài Anydesk/TeamViewer để họ 'sửa giúp'.",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "Microsoft/Apple không bao giờ gọi ngẫu nhiên cho bạn. Cài app truy cập từ xa là tự trao máy cho kẻ gian, họ sẽ chiếm máy, đánh cắp mật khẩu."
+  },
+  {
+    "id": 19,
+    "chuDe": "QR Code lừa đảo",
+    "tinhHuong": "Bạn mua hàng ở siêu thị. Tại quầy thu ngân, bạn mở app ngân hàng, quét mã VietQR do thu ngân đưa để thanh toán.",
+    "phanLoai": "an toàn",
+    "giaiThich": "Giao dịch này an toàn vì bạn đang ở địa điểm tin cậy (siêu thị) và thực hiện giao dịch chủ động với nhân viên, kiểm tra được tên người nhận trước khi xác nhận."
+  },
+  {
+    "id": 20,
+    "chuDe": "Ứng dụng APK",
+    "tinhHuong": "Tin nhắn Zalo từ 'Cán bộ khu vực' yêu cầu bạn cài file VNeID.apk để cập nhật định danh mức 2 online, dọa sẽ bị phạt nếu không làm.",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "VNeID và các app Dịch vụ công chỉ cài từ Google Play / App Store. File .apk lạ 100% là mã độc chiếm quyền điều khiển điện thoại."
+  },
+  {
+    "id": 21,
+    "chuDe": "OTP & mã xác thực",
+    "tinhHuong": "Bạn đăng nhập vào tài khoản Gmail trên máy tính mới. Điện thoại của bạn nhận được thông báo 'Có phải bạn đang đăng nhập?' với nút 'Có' hoặc 'Không'.",
+    "phanLoai": "an toàn",
+    "giaiThich": "Đây là Xác thực 2 yếu tố (2FA) hợp lệ. Nó giúp bảo vệ tài khoản của bạn. Vì bạn đang chủ động đăng nhập nên bấm 'Có' là đúng."
+  },
+  {
+    "id": 22,
+    "chuDe": "Deepfake & AI lừa đảo",
+    "tinhHuong": "Bạn nhận được cuộc gọi, giọng giống hệt con bạn, nói 'Mẹ ơi con bị tai nạn, cần tiền gấp'. Giọng nói rất hoảng loạn và cúp máy nhanh.",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "Đây là lừa đảo AI Voice Clone. Kẻ gian dùng AI tạo giọng giả + kịch bản khẩn cấp. Hãy bình tĩnh, cúp máy và gọi lại SĐT chính chủ của con bạn để kiểm tra."
+  },
+  {
+    "id": 23,
+    "chuDe": "Hỗ trợ kỹ thuật giả mạo",
+    "tinhHuong": "Điện thoại Samsung/iPhone của bạn hiện thông báo pop-up từ Cài đặt (Settings) rằng có bản cập nhật hệ điều hành mới và hỏi bạn có muốn cài đặt không.",
+    "phanLoai": "an toàn",
+    "giaiThich": "Đây là thông báo cập nhật hệ điều hành hợp lệ từ nhà sản xuất. Cập nhật phần mềm giúp vá lỗi bảo mật và giữ an toàn cho thiết bị."
+  },
+  {
+    "id": 24,
+    "chuDe": "Đầu tư siêu lợi nhuận",
+    "tinhHuong": "Bạn thấy link 'Airdrop token' mới trên Twitter. Trang web yêu cầu bạn 'Connect Wallet' (kết nối ví Crypto) và 'Ký' một giao dịch để nhận token miễn phí.",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "Đây là bẫy 'Wallet Drainer'. Việc 'Ký' (Sign) giao dịch đó thực chất là cấp quyền cho kẻ gian rút toàn bộ tài sản (token/NFT) khỏi ví của bạn."
+  },
+  {
+    "id": 25,
+    "chuDe": "Trúng thưởng giả mạo",
+    "tinhHuong": "Bạn nhận được thông báo 'Bạn đã trúng 01 xe máy SH'. Trang web yêu cầu bạn đóng 2 triệu tiền 'phí vận chuyển và làm hồ sơ' trước để nhận giải.",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "Các giải thưởng hợp pháp không bao giờ yêu cầu bạn đóng phí trước. Đây là chiêu trò lừa đảo cổ điển."
+  },
+  {
+    "id": 26,
+    "chuDe": "Giả mạo ngân hàng",
+    "tinhHuong": "Email từ 'security@microsoft.com' báo 'Chúng tôi phát hiện đăng nhập bất thường từ Hà Nội'. Email có nút 'Xem lại hoạt động' trỏ đến `account.microsoft.com`.",
+    "phanLoai": "an toàn",
+    "giaiThich": "Đây là email cảnh báo an ninh hợp lệ. Quan trọng là kiểm tra kỹ người gửi (domain @microsoft.com) và đường link (trỏ đúng đến trang chủ `microsoft.com`)."
+  },
+  {
+    "id": 27,
+    "chuDe": "QR Code lừa đảo",
+    "tinhHuong": "Người bán hàng trên Chợ Tốt gửi bạn mã QR, nói đây là mã QR để 'xác nhận đơn hàng' trên app ngân hàng. Bạn quét và app hiện ra giao diện chuyển tiền.",
+    "phanLoai": "lừa đảo",
+    "giaiThich": "Không có QR nào là 'xác nhận đơn hàng' cả. Đây 100% là mã QR chuyển tiền (VietQR). Nếu bạn nhập OTP/xác nhận, bạn sẽ mất tiền."
+  },
+  {
+    "id": 28,
+    "chuDe": "Việc làm part-time",
+    "tinhHuong": "Bạn ứng tuyển vị trí CTV viết bài trên TopCV. Công ty gửi bạn email với domain (@congty.com), hẹn phỏng vấn qua Google Meet và không yêu cầu nộp phí.",
+    "phanLoai": "an toàn",
+    "giaiThich": "Đây là quy trình tuyển dụng bình thường. Công ty uy tín, liên lạc qua email chính thức, phỏng vấn rõ ràng và không thu phí."
+  }
+]

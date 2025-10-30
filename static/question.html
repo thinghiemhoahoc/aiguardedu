@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="vi" data-bs-theme="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Flashcard An toàn số — Phán đoán tình huống</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --brand: #0d6efd;
+      --brand-soft: #e7f1ff;
+      --safe: #0ea5e9;
+      --scam: #ef4444;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8f9fa;
+      background-image: linear-gradient(180deg, var(--brand-soft) 0%, #ffffff 30%);
+      min-height: 100vh;
+    }
+    .badge-topic {
+      background: var(--brand-soft);
+      color: var(--brand);
+      border: 1px solid rgba(13, 110, 253, .15);
+      font-weight: 600;
+    }
+    .card-quiz {
+      border-radius: 18px;
+      box-shadow: 0 10px 40px rgba(13, 110, 253, 0.12);
+      border: 0;
+    }
+    .option-btn {
+      min-height: 54px;
+      font-weight: 600;
+      font-size: 1.05rem;
+      padding: 1rem;
+      border-radius: 12px;
+      border: 2px solid var(--bs-border-color-translucent);
+      transition: all 0.2s ease-in-out;
+    }
+    .option-btn:not(:disabled):hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.07);
+    }
+    .option-safe { border-color: var(--safe); color: var(--safe); }
+    .option-scam { border-color: var(--scam); color: var(--scam); }
+    .option-safe:not(:disabled):hover { background: var(--safe); color: #fff; }
+    .option-scam:not(:disabled):hover { background: var(--scam); color: #fff; }
+    .correct {
+      border-color: #16a34a !important;
+      background: #ecfdf5 !important;
+      color: #15803d !important;
+    }
+    .wrong {
+      border-color: #ef4444 !important;
+      background: #fff1f2 !important;
+      color: #dc2626 !important;
+    }
+    .explain {
+      border-left: none;
+      background: var(--brand-soft);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    .explain .fa-lightbulb { font-size: 1.2rem; }
+    .sticky-topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1020;
+      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border-bottom: 0;
+    }
+    
+    /* Style cho Phase 1 */
+    #phase1 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 80vh;
+    }
+    .card-start {
+        border-radius: 18px;
+        box-shadow: 0 10px 40px rgba(13, 110, 253, 0.12);
+        border: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="phase1" class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-8">
+        <div class="card card-start text-center">
+          <div class="card-body p-4 p-md-5">
+            <span class="fs-1 text-primary"><i class="fa-solid fa-shield-halved"></i></span>
+            <h1 class="h3 fw-bold mt-3">Flashcard An toàn số</h1>
+            <p class="text-secondary">
+              Bạn sẽ có <b>90 giây</b> để trả lời <b>12 tình huống</b>.
+            </p>
+            <p class="text-secondary">Hãy phán đoán đâu là "An toàn", đâu là "Lừa đảo"!</p>
+            
+            <div class="my-4">
+              <label for="filterTopic" class="form-label fw-semibold">Chọn chủ đề (hoặc tất cả)</label>
+              <select id="filterTopic" class="form-select form-select-lg">
+                <option value="__all__">Tất cả chủ đề</option>
+              </select>
+            </div>
+            
+            <button id="btnStart" class="btn btn-primary btn-lg w-100 fw-bold">
+              <i class="fa-solid fa-play me-2"></i> Bắt đầu
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="phase2" class="d-none">
+    <nav class="sticky-topbar">
+      <div class="container py-3 d-flex align-items-center justify-content-between">
+        <div class="d-flex align-items-center gap-3">
+          <span class="fs-3 text-primary"><i class="fa-solid fa-shield-halved"></i></span>
+          <div>
+            <h1 class="h4 mb-0 fw-bold">Thử thách 90s</h1>
+            <small class="text-secondary">Phán đoán: <b>An toàn</b> hay <b>Lừa đảo</b></small>
+          </div>
+        </div>
+
+        <div class="d-flex align-items-center gap-3">
+            <span class="text-secondary"><i class="fa-regular fa-clock"></i> Thời gian:</span>
+            <span id="timerDisplay" class="fs-5 fw-bold text-primary" style="min-width: 60px;">01:30</span>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container my-4">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+
+          <div class="row g-3 align-items-center mb-3">
+            <div class="col-md-8">
+              <div class="progress" role="progressbar" aria-label="Tiến độ" aria-valuemin="0" aria-valuemax="100" style="height:12px; border-radius: 6px;">
+                <div id="progressBar" class="progress-bar" style="width: 0%"></div>
+              </div>
+              <small id="progressText" class="text-secondary mt-1 d-block"></small>
+            </div>
+            <div class="col-md-4 text-md-end">
+              <span class="badge text-bg-light rounded-pill px-3 py-2">
+                <i class="fa-regular fa-circle-check text-success me-1"></i>
+                Đúng: <span id="scoreCorrect" class="fw-bold">0</span>
+              </span>
+              <span class="badge text-bg-light rounded-pill px-3 py-2 ms-2">
+                <i class="fa-regular fa-circle-xmark text-danger me-1"></i>
+                Sai: <span id="scoreWrong" class="fw-bold">0</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="card card-quiz">
+            <div class="card-body p-4 p-md-5">
+              <div class="d-flex align-items-center justify-content-between mb-3">
+                <div>
+                  <span id="topicBadge" class="badge badge-topic px-3 py-2"></span>
+                </div>
+                <span class="text-secondary fw-semibold"><i class="fa-regular fa-rectangle-list me-1"></i><span id="counter">0/0</span></span>
+              </div>
+
+              <h2 id="scenario" class="h5 mb-4" style="font-size: 1.25rem; line-height: 1.6; font-weight: 600;"></h2>
+
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <button id="btnSafe" class="btn btn-light w-100 option-btn option-safe">
+                    <i class="fa-solid fa-thumbs-up me-2"></i> An toàn
+                  </button>
+                </div>
+                <div class="col-md-6">
+                  <button id="btnScam" class="btn btn-light w-100 option-btn option-scam">
+                    <i class="fa-solid fa-triangle-exclamation me-2"></i> Lừa đảo
+                  </button>
+                </div>
+              </div>
+
+              <div id="feedback" class="mt-4 d-none">
+                <div id="feedbackAlert" class="alert fw-semibold" role="alert"></div>
+                <div class="p-3 rounded explain">
+                  <div class="fw-bold mb-2"><i class="fa-solid fa-lightbulb me-2 text-warning"></i>Giải thích</div>
+                  <div id="explainText" class="text-secondary" style="line-height: 1.6;"></div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+                <button id="btnPrev" class="btn btn-light">
+                  <i class="fa-solid fa-arrow-left-long me-1"></i> Trước
+                </button>
+                <button id="btnNext" class="btn btn-primary fw-bold px-4">
+                  Tiếp <i class="fa-solid fa-arrow-right-long ms-1"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div id="resultPanel" class="mt-4 d-none">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body p-4">
+                
+                <div id="timeupAlert" class="alert alert-warning d-none" role="alert">
+                  <i class="fa-solid fa-hourglass-end me-2"></i> <b>Hết giờ!</b>
+                </div>
+
+                <h3 class="h5 mb-3 fw-bold"><i class="fa-solid fa-chart-simple me-2 text-primary"></i>Tổng kết</h3>
+                <p class="mb-1">Số câu đúng: <b id="sumCorrect" class="text-success">0</b></p>
+                <p class="mb-3">Số câu sai: <b id="sumWrong" class="text-danger">0</b></p>
+                
+                <div class="progress my-3" style="height: 20px; border-radius: 10px;">
+                  <div id="progressScore" class="progress-bar bg-success fw-bold" style="width:0%"></div>
+                </div>
+                
+                <div class="mt-3">
+                  <button id="btnPlayAgain" class="btn btn-primary">
+                    <i class="fa-solid fa-rotate-right me-1"></i> Chơi lại
+                  </button>
+                  <button id="btnReviewWrong" class="btn btn-outline-danger btn-sm ms-2">
+                    <i class="fa-regular fa-eye me-1"></i> Xem lại câu sai
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <p class="text-center text-secondary mt-4">
+            <small><i class="fa-regular fa-circle-question me-1"></i>Mẹo: Hãy cảnh giác với yêu cầu gấp, xin OTP/mật khẩu, link lạ, ứng dụng lạ.</small>
+          </p>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // ====== Cài đặt trò chơi ======
+    const QUIZ_LENGTH = 12; // 12 câu hỏi
+    const QUIZ_TIME = 90;   // 90 giây
+
+    // ====== Trạng thái ======
+    let allData = [];      // Lưu trữ toàn bộ câu hỏi từ JSON
+    let data = [];         // 12 câu hỏi được chọn cho vòng này
+    let current = 0;
+    let order = [];      
+    let answers = {};    
+    let score = { correct: 0, wrong: 0 };
+    let timerInterval = null; // Biến giữ đồng hồ
+    let timeLeft = 0;         // Thời gian còn lại
+
+    // ====== Tiện ích ======
+    const $ = sel => document.querySelector(sel);
+    const shuffle = (arr) => arr.map(v => ({ v, r: Math.random() })).sort((a, b) => a.r - b.r).map(x => x.v);
+    const formatTime = (seconds) => {
+        const mins = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    };
+
+    // ====== Logic chính của Quiz (Phase 2) ======
+    
+    // Bắt đầu trò chơi (Chuyển từ Phase 1 -> 2)
+    function startGame() {
+        const filteredTopic = $("#filterTopic").value;
+        
+        // 1. Lọc data theo chủ đề
+        const pool = filteredTopic === "__all__" ? allData : allData.filter(x => x.chuDe === filteredTopic);
+        
+        if (pool.length < QUIZ_LENGTH) {
+            alert(`Chủ đề này chỉ có ${pool.length} câu, không đủ ${QUIZ_LENGTH} câu. Vui lòng chọn "Tất cả chủ đề".`);
+            return;
+        }
+
+        // 2. Xáo trộn và chọn 12 câu
+        data = shuffle(pool).slice(0, QUIZ_LENGTH);
+        order = data.map(x => x.id);
+
+        // 3. Reset trạng thái
+        current = 0;
+        answers = {};
+        score = { correct: 0, wrong: 0 };
+        $("#resultPanel").classList.add("d-none");
+        $("#timeupAlert").classList.add("d-none");
+
+        // 4. Chuyển giao diện
+        $("#phase1").classList.add("d-none");
+        $("#phase2").classList.remove("d-none");
+
+        // 5. Render câu đầu tiên và bắt đầu đếm giờ
+        renderCard();
+        startTimer();
+    }
+
+    // Quay về màn hình chính (Phase 1)
+    function goHome() {
+        $("#phase2").classList.add("d-none");
+        $("#phase1").classList.remove("d-none");
+        clearInterval(timerInterval); // Dừng đồng hồ
+    }
+
+    // Bắt đầu đếm ngược
+    function startTimer() {
+        clearInterval(timerInterval); // Xóa đồng hồ cũ (nếu có)
+        timeLeft = QUIZ_TIME;
+        $("#timerDisplay").textContent = formatTime(timeLeft);
+
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            $("#timerDisplay").textContent = formatTime(timeLeft);
+
+            if (timeLeft < 0) {
+                endQuiz(true); // Hết giờ
+            }
+        }, 1000);
+    }
+
+    // Kết thúc quiz (do hết giờ hoặc hết câu)
+    function endQuiz(wasTimedOut = false) {
+        clearInterval(timerInterval); // Dừng đồng hồ
+        
+        // Vô hiệu hóa các nút
+        ["btnSafe", "btnScam", "btnNext", "btnPrev"].forEach(id => $("#" + id).disabled = true);
+
+        if (wasTimedOut) {
+            $("#timeupAlert").classList.remove("d-none");
+        }
+
+        // Hiển thị bảng thành tích
+        const totalAns = score.correct + score.wrong;
+        const pctScore = totalAns ? Math.round(score.correct / totalAns * 100) : 0;
+        $("#sumCorrect").textContent = score.correct;
+        $("#sumWrong").textContent = score.wrong;
+        $("#progressScore").style.width = pctScore + "%";
+        $("#progressScore").textContent = pctScore + "%";
+        
+        $("#resultPanel").classList.remove("d-none");
+    }
+
+    // Cập nhật thanh tiến độ
+    const updateProgress = () => {
+      const total = order.length || 0;
+      const idx = current + 1;
+      $("#counter").textContent = `${idx}/${total}`;
+      const pct = total ? Math.round((idx) / total * 100) : 0;
+      $("#progressBar").style.width = pct + "%";
+      $("#progressText").textContent = total ? `Bạn đã hoàn thành ${idx}/${total} câu` : "";
+      $("#scoreCorrect").textContent = score.correct;
+      $("#scoreWrong").textContent = score.wrong;
+    };
+
+    // Hiển thị thẻ câu hỏi
+    function renderCard() {
+      if (order.length === 0) return;
+      const item = data.find(x => x.id === order[current]);
+      if (!item) return;
+
+      $("#topicBadge").textContent = item.chuDe;
+      $("#scenario").textContent = item.tinhHuong;
+
+      ["btnSafe", "btnScam"].forEach(id => {
+        const el = $("#" + id);
+        el.disabled = false;
+        el.classList.remove("correct", "wrong");
+      });
+
+      $("#feedback").classList.add("d-none");
+      $("#feedbackAlert").className = "alert fw-semibold"; 
+      $("#explainText").textContent = "";
+
+      const given = answers[item.id];
+      if (given) {
+        showFeedback(given, item);
+      }
+
+      $("#btnPrev").disabled = current === 0;
+      $("#btnNext").disabled = current >= order.length - 1;
+
+      updateProgress();
+    }
+
+    // Hiển thị phản hồi đúng/sai
+    function showFeedback(choice, item) {
+      const correctLabel = item.phanLoai.toLowerCase();
+      const isCorrect = (choice === correctLabel);
+
+      ["btnSafe", "btnScam"].forEach(id => $("#" + id).disabled = true);
+
+      if (choice === "an toàn") {
+        $("#btnSafe").classList.add(isCorrect ? "correct" : "wrong");
+      } else {
+        $("#btnScam").classList.add(isCorrect ? "correct" : "wrong");
+      }
+      
+      if (!isCorrect) {
+        if(correctLabel === "an toàn") {
+          $("#btnSafe").classList.add("correct");
+        } else {
+          $("#btnScam").classList.add("correct");
+        }
+      }
+
+      const fb = $("#feedback");
+      const al = $("#feedbackAlert");
+      fb.classList.remove("d-none");
+      if (isCorrect) {
+        al.classList.add("alert-success");
+        al.innerHTML = `<i class="fa-regular fa-circle-check me-2"></i>Chính xác! Đây là <b>${correctLabel}</b>.`;
+      } else {
+        al.classList.add("alert-danger");
+        al.innerHTML = `<i class="fa-regular fa-circle-xmark me-2"></i>Chưa đúng. Trường hợp này là <b>${correctLabel}</b>.`;
+      }
+      $("#explainText").textContent = item.giaiThich;
+    }
+    
+    // Xử lý khi người dùng chọn 1 đáp án
+    function handleAnswer(choice) {
+      const item = data.find(x => x.id === order[current]);
+      if (!item) return;
+      if (!answers[item.id]) { 
+        answers[item.id] = choice;
+        if (item.phanLoai.toLowerCase() === choice) {
+          score.correct++;
+        } else {
+          score.wrong++;
+        }
+      }
+      showFeedback(choice, item);
+      updateProgress();
+
+      // Kiểm tra xem đã hết câu hỏi chưa
+      if (Object.keys(answers).length === order.length) {
+          endQuiz(false); // Kết thúc quiz (không phải do hết giờ)
+      }
+    }
+
+    // ====== Sự kiện ======
+    $("#btnStart").addEventListener("click", startGame); // Nút ở Phase 1
+    $("#btnPlayAgain").addEventListener("click", goHome); // Nút ở Bảng kết quả
+
+    $("#btnSafe").addEventListener("click", () => handleAnswer("an toàn"));
+    $("#btnScam").addEventListener("click", () => handleAnswer("lừa đảo"));
+
+    $("#btnNext").addEventListener("click", () => {
+      if (current < order.length - 1) {
+        current++;
+        renderCard();
+      }
+    });
+
+    $("#btnPrev").addEventListener("click", () => {
+      if (current > 0) {
+        current--;
+        renderCard();
+      }
+    });
+
+    $("#btnReviewWrong").addEventListener("click", () => {
+      const wrongIds = Object.keys(answers)
+        .map(id => Number(id))
+        .filter(id => {
+          const it = data.find(x => x.id === id);
+          return it && answers[id] !== it.phanLoai.toLowerCase();
+        });
+
+      if (wrongIds.length === 0) {
+        alert("Bạn chưa có câu sai nào để xem lại!");
+        return;
+      }
+      // Tạm thời vô hiệu hóa nút Prev/Next khi xem lại
+      $("#btnPrev").disabled = true;
+      $("#btnNext").disabled = true;
+
+      order = wrongIds;
+      current = 0;
+      renderCard();
+    });
+
+    // ====== Khởi chạy (Tải data) ======
+    async function init() {
+      try {
+        const res = await fetch("scams.json");
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+        const json = await res.json();
+        allData = json; // Lưu toàn bộ data
+
+        // Lọc và điền các chủ đề vào select box (ở Phase 1)
+        const topics = Array.from(new Set(allData.map(x => x.chuDe)));
+        const sel = $("#filterTopic");
+        topics.forEach(tp => {
+          const opt = document.createElement("option");
+          opt.value = tp;
+          opt.textContent = `Chủ đề: ${tp}`;
+          sel.appendChild(opt);
+        });
+
+        // Mặc định, chỉ hiển thị Phase 1
+        $("#phase1").classList.remove("d-none");
+        $("#phase2").classList.add("d-none");
+
+      } catch (e) {
+        console.error(e);
+        alert("Không tải được dữ liệu. Hãy kiểm tra file scams.json nằm cùng thư mục với index.html.");
+        document.body.innerHTML = `<div class="alert alert-danger m-5">Lỗi: Không thể tải file <code>scams.json</code>. Vui lòng kiểm tra lại file và đường dẫn.</div>`;
+      }
+    }
+    
+    init(); // Chạy hàm init khi tải trang
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

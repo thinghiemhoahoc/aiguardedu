@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Phòng chống lừa đảo — Trang chủ</title>
+  <meta
+    name="description"
+    content="Dự án Phòng chống lừa đảo: Quiz tình huống nhanh và AI phân biệt tin nhắn scam/an toàn."
+  />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    rel="stylesheet"
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    :root {
+      --primary: #2563eb; /* xanh dương sáng */
+      --accent: #10b981; /* xanh ngọc tươi */
+      --warning: #fb923c; /* cam sáng */
+      --pink: #ec4899; /* hồng */
+      --purple: #8b5cf6; /* tím */
+      --yellow: #f59e0b; /* vàng */
+      --bg1: #fbfdff; /* nền rất sáng */
+      --bg2: #eef6ff; /* loang xanh nhạt */
+      --glass: rgba(255, 255, 255, 0.85); /* Tăng độ mờ nhẹ */
+      --text: #0f172a;
+      --muted: #475569;
+    }
+    html {
+      scroll-behavior: smooth; /* Cuộn mượt khi bấm link # */
+    }
+    body {
+      background: radial-gradient(1200px 600px at 10% -10%, #dbeafe, transparent),
+        radial-gradient(900px 600px at 110% 10%, #fee2e2, transparent),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+      color: var(--text);
+      font-family: 'Inter', system-ui, sans-serif;
+      min-height: 100vh;
+    }
+    
+    /* --- Navbar (Glassmorphism) --- */
+    .navbar.glass {
+      background: var(--glass) !important;
+      backdrop-filter: blur(10px); /* Hiệu ứng kính mờ */
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+    .navbar a.nav-link,
+    .navbar-brand {
+      color: var(--text) !important; /* Đổi màu chữ navbar */
+      font-weight: 500;
+    }
+    .navbar-brand:hover,
+    .navbar .nav-link:hover,
+    .navbar .nav-link.active {
+      color: var(--primary) !important; /* Hiệu ứng hover */
+    }
+    
+    /* --- Ticker (Thanh cảnh báo chạy) --- */
+    .ticker-wrap {
+      width: 100%;
+      overflow: hidden;
+      background: linear-gradient(
+        90deg,
+        #2563eb,
+        #10b981,
+        #f59e0b,
+        #ec4899
+      );
+      color: white;
+      padding: 0.5rem 0;
+    }
+    .ticker-move {
+      display: inline-block;
+      white-space: nowrap;
+      animation: ticker 30s linear infinite;
+    }
+    .ticker-item {
+      display: inline-block;
+      padding: 0 1.5rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); } /* Di chuyển 50% vì nội dung lặp lại */
+    }
+
+    /* --- Hero (Hài hòa hơn) --- */
+    .hero {
+      /* Đổi gradient hài hòa hơn */
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      color: white;
+      padding: 5rem 0; /* Tăng padding */
+      text-align: center;
+    }
+    .hero h1 {
+      font-weight: 700;
+    }
+    .btn-primary {
+      background: var(--primary);
+      border: none;
+    }
+    .btn-outline-light {
+      border-color: white;
+      color: white;
+    }
+    .btn-outline-light:hover {
+      background: white;
+      color: var(--primary);
+    }
+    
+    /* --- Glass Card (Thêm blur) --- */
+    .glass {
+      background: var(--glass);
+      backdrop-filter: blur(10px); /* Hiệu ứng kính mờ */
+      border-radius: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.5); /* Sáng hơn cho nền màu */
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07); /* Giảm nhẹ shadow */
+    }
+    .feature-card:hover {
+      transform: translateY(-5px);
+      transition: all 0.3s ease;
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Section BG Alternating (Nền xen kẽ) */
+    section:nth-of-type(even) {
+       /* Áp dụng cho section chẵn (rules) */
+      background-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .badge-soft {
+      background: var(--primary);
+      color: white;
+      padding: 0.4rem 0.6rem;
+      font-size: 0.85rem;
+    }
+    
+    /* --- Footer (Nhẹ nhàng hơn) --- */
+    footer {
+      background: var(--bg2); /* Đổi sang nền sáng */
+      color: var(--muted); /* Đổi màu chữ */
+      padding: 1.5rem 0;
+      margin-top: auto; /* Đẩy footer xuống cuối nếu nội dung ngắn */
+    }
+  </style>
+</head>
+<body class="d-flex flex-column">
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top glass">
+    <div class="container">
+      <a class="navbar-brand" href="#"
+        ><i class="fa-solid fa-shield-halved me-2"></i>AI Guard EDU</a
+      >
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#nav"
+        aria-controls="nav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="nav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#intro">Giới thiệu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#features">Tính năng</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#rules">Quy tắc</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#cta">Bắt đầu</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="ticker-wrap">
+    <div class="ticker-move">
+      <span class="ticker-item"
+        ><i class="fa-solid fa-bullhorn me-1"></i>Không cung cấp OTP / mã QR
+        đăng nhập cho bất kỳ ai</span
+      >
+      <span class="ticker-item"
+        ><i class="fa-solid fa-triangle-exclamation me-1"></i>Không bấm vào
+        liên kết lạ — truy cập thủ công trang chính thức</span
+      >
+      <span class="ticker-item"
+        ><i class="fa-solid fa-clock me-1"></i>Dừng lại 10 giây, xác minh
+        qua kênh thứ 2</span
+      >
+      <span class="ticker-item"
+        ><i class="fa-solid fa-bullhorn me-1"></i>Không cung cấp OTP / mã QR
+        đăng nhập cho bất kỳ ai</span
+      >
+      <span class="ticker-item"
+        ><i class="fa-solid fa-triangle-exclamation me-1"></i>Không bấm vào
+        liên kết lạ — truy cập thủ công trang chính thức</span
+      >
+      <span class="ticker-item"
+        ><i class="fa-solid fa-clock me-1"></i>Dừng lại 10 giây, xác minh
+        qua kênh thứ 2</span
+      >
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="container">
+      <h1>Phòng chống lừa đảo trên không gian số</h1>
+      <p class="lead mt-3">
+        Dự án gồm <strong>Quiz tình huống nhanh</strong> và
+        <strong>AI phân tích tin nhắn</strong> để giúp bạn tránh bị lừa đảo
+        trực tuyến.
+      </p>
+      <div class="d-flex flex-wrap justify-content-center gap-2 mt-4">
+        <a href="/question" class="btn btn-light btn-lg"
+          ><i class="fa-solid fa-bolt me-2"></i>Làm Quiz nhanh</a
+        >
+        <a href="/message" class="btn btn-outline-light btn-lg"
+          ><i class="fa-solid fa-robot me-2"></i>Thử AI phát hiện Scam</a
+        >
+        <a href="/scam_news" class="btn btn-outline-light btn-lg"
+          ><i class="fa-solid fa-newspaper me-2"></i>Tình huống lừa đảo
+          tổng hợp</a
+        >
+      </div>
+    </div>
+  </header>
+
+  <section id="campaign" class="py-5">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-7">
+          <div class="glass p-4 p-lg-5">
+            <div class="d-flex flex-wrap gap-2 mb-3">
+              <span class="badge" style="background: #2563eb" title="An toàn số"
+                ><i class="fa-solid fa-shield-halved me-1"></i>An toàn số</span
+              >
+              <span
+                class="badge"
+                style="background: #10b981"
+                title="Nhận thức cộng đồng"
+                ><i class="fa-solid fa-users me-1"></i>Nhận thức cộng đồng</span
+              >
+              <span
+                class="badge"
+                style="background: #f59e0b"
+                title="Phát hiện sớm"
+                ><i class="fa-solid fa-magnifying-glass me-1"></i>Phát hiện
+                sớm</span
+              >
+            </div>
+            <h3 class="fw-bold mb-2">
+              "Không vội vàng — Không chuyển tiền — Không chia sẻ mã"
+            </h3>
+            <p class="mb-3 text-muted">
+              Thông điệp cốt lõi của chiến dịch Phòng chống lừa đảo. Mỗi cá
+              nhân là một điểm chốt an toàn cho gia đình và cộng đồng.
+            </p>
+            <ul class="mb-0">
+              <li>
+                <b>5 KHÔNG</b>: Không bấm link lạ • Không tải app ngoài chợ •
+                Không đọc OTP • Không chia sẻ thông tin cá nhân • Không tin vào
+                lợi nhuận siêu nhanh
+              </li>
+              <li class="mt-1">
+                <b>3 LUÔN</b>: Luôn xác minh từ nguồn chính thức • Luôn cảnh
+                giác với yêu cầu khẩn cấp • Luôn báo cáo nội dung nghi ngờ
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="glass p-4 h-100 text-center">
+            <div class="display-5 mb-2">
+              <i class="fa-solid fa-hands-holding-circle"></i>
+            </div>
+            <h5 class="fw-semibold">Cam kết cộng đồng an toàn</h5>
+            <p class="text-muted">
+              Chia sẻ kiến thức cho người thân, cài đặt 2FA, và kiểm tra bảo
+              mật thiết bị định kỳ.
+            </p>
+            <div class="d-grid gap-2 d-lg-block">
+              <a href="/scam_news" class="btn btn-primary me-lg-2"
+                ><i class="fa-solid fa-newspaper me-1"></i>Xem tình huống
+                mới</a
+              >
+              <a href="#rules" class="btn btn-outline-primary"
+                ><i class="fa-solid fa-list-check me-1"></i>Xem quy tắc</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="intro" class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="glass p-4">
+            <h4>
+              <i class="fa-solid fa-circle-question me-2 text-primary"></i
+              >Quiz tình huống
+            </h4>
+            <p>
+              Bộ câu hỏi ngắn mô phỏng các tình huống giả mạo phổ biến giúp
+              bạn rèn kỹ năng nhận biết lừa đảo.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="glass p-4">
+            <h4>
+              <i class="fa-solid fa-robot me-2 text-success"></i>AI phân loại
+              tin nhắn
+            </h4>
+            <p>
+              Dán nội dung tin nhắn, AI sẽ giúp đánh giá mức độ an toàn và
+              cảnh báo dấu hiệu rủi ro.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="features" class="py-5">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          <a
+            class="text-decoration-none"
+            href="/question"
+            aria-label="Đi đến Quiz (/question)"
+          >
+            <div class="glass p-4 h-100 feature-card">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 text-primary">Quiz nhanh</h5>
+                <i class="fa-solid fa-bolt"></i>
+              </div>
+              <p class="text-muted mb-0">
+                Làm bài 60–90s, học nhanh các dấu hiệu lừa đảo.
+              </p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a
+            class="text-decoration-none"
+            href="/message"
+            aria-label="Đi đến AI Scam Detection (/message)"
+          >
+            <div class="glass p-4 h-100 feature-card">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 text-success">Scam Detection (AI)</h5>
+                <i class="fa-solid fa-robot"></i>
+              </div>
+              <p class="text-muted mb-0">
+                Dán nội dung tin nhắn để AI phân tích mức độ rủi ro.
+              </p>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-4">
+          <a
+            class="text-decoration-none"
+            href="/scam_news"
+            aria-label="Đi đến trang Tổng hợp tình huống lừa đảo (/scam_news)"
+          >
+            <div class="glass p-4 h-100 feature-card">
+              <div
+                class="d-flex justify-content-between align-items-center mb-2"
+              >
+                <h5 class="mb-0 text-warning">Tình huống lừa đảo</h5>
+                <i class="fa-solid fa-newspaper"></i>
+              </div>
+              <p class="text-muted mb-0">
+                Bản tin tổng hợp các chiêu trò mới và cách phòng tránh.
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="knowledge" class="py-5">
+    <div class="container">
+      <div class="text-center mb-4">
+        <h3 class="fw-bold" style="color: #8b5cf6">
+          <i class="fa-solid fa-lightbulb me-2"></i>Thông điệp & Kiến thức
+          nhanh
+        </h3>
+        <p class="text-muted">
+          Những điểm nhớ quan trọng để tự bảo vệ mình trước các chiêu trò lừa
+          đảo có AI hỗ trợ.
+        </p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div
+            class="p-4 h-100 text-white rounded-4"
+            style="background: linear-gradient(135deg, #2563eb, #60a5fa)"
+          >
+            <h6 class="fw-bold">
+              <i class="fa-solid fa-fingerprint me-2"></i>Danh tính số
+            </h6>
+            <p class="small mb-0">
+              Giọng nói/video có thể bị giả mạo. Luôn xác minh đa kênh trước
+              khi làm theo.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div
+            class="p-4 h-100 text-white rounded-4"
+            style="background: linear-gradient(135deg, #10b981, #34d399)"
+          >
+            <h6 class="fw-bold">
+              <i class="fa-solid fa-key me-2"></i>2FA & Passkeys
+            </h6>
+            <p class="small mb-0">
+              Bật 2FA cho email, ngân hàng, mạng xã hội. Không chia sẻ mã xác
+              thực.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div
+            class="p-4 h-100 text-white rounded-4"
+            style="background: linear-gradient(135deg, #f59e0b, #fbbf24)"
+          >
+            <h6 class="fw-bold">
+              <i class="fa-solid fa-link-slash me-2"></i>Liên kết độc hại
+            </h6>
+            <p class="small mb-0">
+              Đọc kỹ tên miền, tránh link rút gọn. Vào trang chính thức bằng
+              cách gõ tay.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div
+            class="p-4 h-100 text-white rounded-4"
+            style="background: linear-gradient(135deg, #ec4899, #f472b6)"
+          >
+            <h6 class="fw-bold">
+              <i class="fa-solid fa-triangle-exclamation me-2"></i>Tín hiệu
+              khẩn cấp
+            </h6>
+            <p class="small mb-0">
+              Nội dung dọa nạt/khẩn cấp là lá cờ đỏ. Dừng 10s để bình tĩnh
+              kiểm tra.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="rules" class="py-5">
+    <div class="container">
+      <div class="text-center mb-4">
+        <span class="badge-soft rounded-pill"
+          ><i class="fa-solid fa-robot"></i> AI Safety</span
+        >
+        <h3 class="fw-bold mt-2 text-primary">
+          Quy tắc & lưu ý để tránh bị lừa đảo bằng AI
+        </h3>
+        <p class="text-muted">
+          Áp dụng cho tin nhắn, cuộc gọi, email, mạng xã hội.
+        </p>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="glass p-4 h-100">
+            <h5>
+              <i class="fa-solid fa-stopwatch text-warning me-2"></i>Nguyên tắc
+              vàng 10s
+            </h5>
+            <ul>
+              <li>Dừng lại 10s trước khi làm theo yêu cầu khẩn cấp.</li>
+              <li>Xác minh bằng kênh chính thức.</li>
+              <li>Không nhấp liên kết lạ.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="glass p-4 h-100">
+            <h5>
+              <i class="fa-solid fa-user-shield text-success me-2"></i>Bảo vệ
+              tài khoản
+            </h5>
+            <ul>
+              <li>Bật xác thực hai lớp (2FA).</li>
+              <li>Không chia sẻ OTP hoặc mã QR.</li>
+              <li>Sử dụng mật khẩu mạnh và khác nhau.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="glass p-4 h-100">
+            <h5>
+              <i class="fa-solid fa-sack-dollar text-danger me-2"></i>Nguyên
+              tắc chuyển tiền
+            </h5>
+            <ul>
+              <li>Không chuyển tiền qua link hay yêu cầu lạ.</li>
+              <li>Đối chiếu đa kênh, xác minh người nhận.</li>
+              <li>Ngân hàng không bao giờ xin OTP.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="dos" class="py-5" style="background-color: rgba(248, 249, 250, 0.7)">
+    <div class="container">
+      <div class="text-center mb-4">
+        <h3 class="fw-bold text-success">
+          <i class="fa-solid fa-circle-check me-2"></i>Làm /
+          <span class="text-danger">Không làm</span>
+        </h3>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-6">
+          <div class="glass p-4 h-100">
+            <h5 class="text-success">
+              <i class="fa-solid fa-thumbs-up me-2"></i>NÊN LÀM
+            </h5>
+            <ul class="mb-0">
+              <li>
+                Cập nhật hệ điều hành, trình duyệt, ứng dụng ngân hàng.
+              </li>
+              <li>
+                Dùng trình quản lý mật khẩu, bật 2FA và thông báo đăng nhập
+                lạ.
+              </li>
+              <li>
+                Lưu dấu hiệu nghi ngờ (ảnh chụp màn hình) trước khi báo cáo.
+              </li>
+              <li>
+                Kiểm tra lại số tài khoản/điện thoại bằng nguồn chính thức.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="glass p-4 h-100">
+            <h5 class="text-danger">
+              <i class="fa-solid fa-ban me-2"></i>KHÔNG NÊN
+            </h5>
+            <ul class="mb-0">
+              <li>
+                Không chuyển tiền chỉ vì lời nhờ vả khẩn cấp qua chat/cuộc
+                gọi.
+              </li>
+              <li>
+                Không cài ứng dụng .apk ngoài chợ / bật cài đặt từ nguồn không
+                xác định.
+              </li>
+              <li>
+                Không chia sẻ màn hình thiết bị/ ví điện tử cho người lạ.
+              </li>
+              <li>Không quét mã QR từ nguồn bạn không kiểm soát.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta" class="py-5 text-center">
+    <div class="container">
+      <h3 class="fw-bold text-primary">Sẵn sàng kiểm tra độ miễn dịch số?</h3>
+      <p class="text-muted">
+        Bắt đầu với Quiz hoặc để AI kiểm tra tin nhắn ngay bây giờ!
+      </p>
+      <div class="d-flex flex-wrap justify-content-center gap-2 mt-4">
+        <a href="/question" class="btn btn-warning btn-lg"
+          ><i class="fa-solid fa-circle-play me-2"></i>Bắt đầu Quiz</a
+        >
+        <a href="/message" class="btn btn-success btn-lg"
+          ><i class="fa-solid fa-magnifying-glass-chart me-2"></i>Phân tích
+          tin nhắn</a
+        >
+        <a href="/scam_news" class="btn btn-primary btn-lg"
+          ><i class="fa-solid fa-newspaper me-2"></i>Xem tình huống lừa đảo</a
+        >
+      </div>
+    </div>
+  </section>
+
+  <footer class="text-center">
+    <div class="container">
+      <p class="mb-0">
+        <i class="fa-solid fa-shield-heart me-2"></i>Dự án Phòng chống lừa
+        đảo — cùng xây dựng không gian số an toàn.
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Phím tắt: Q (Quiz), M (Message), N (News)
+    document.addEventListener('keydown', (e) => {
+      const tag = (e.target.tagName || '').toUpperCase();
+      if (
+        tag === 'INPUT' ||
+        tag === 'TEXTAREA' ||
+        e.metaKey ||
+        e.ctrlKey ||
+        e.altKey
+      )
+        return;
+      const key = e.key.toLowerCase();
+      if (key === 'q') window.location.href = '/question';
+      if (key === 'm') window.location.href = '/message';
+      if (key === 'n') window.location.href = '/scam_news';
+    });
+
+    // (Tùy chọn) Kích hoạt link 'active' trên navbar khi cuộn
+    const navLinks = document.querySelectorAll('.navbar .nav-link');
+    const sections = document.querySelectorAll('section[id]');
+
+    function changeNavOnScroll() {
+      let current = '';
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (pageYOffset >= sectionTop - 100) { // 100 là offset
+          current = section.getAttribute('id');
+        }
+      });
+
+      navLinks.forEach((link) => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(current)) {
+          link.classList.add('active');
+        }
+      });
+    }
+    window.addEventListener('scroll', changeNavOnScroll);
+  </script>
+</body>
+</html>
